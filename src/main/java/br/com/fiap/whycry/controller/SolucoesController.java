@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Solucoes;
 import br.com.fiap.whycry.service.SolucoesService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Solucoes endpoint")
 @RestController
 @RequestMapping("/api/solucoes")
 public class SolucoesController {

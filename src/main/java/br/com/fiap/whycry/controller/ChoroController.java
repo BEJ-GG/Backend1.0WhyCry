@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Choro;
 import br.com.fiap.whycry.service.ChoroService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Choro endpoint")
 @RestController
 @RequestMapping("/api/choro")
 public class ChoroController {

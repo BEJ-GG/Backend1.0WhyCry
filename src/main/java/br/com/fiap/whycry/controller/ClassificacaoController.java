@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Classificacao;
 import br.com.fiap.whycry.service.ClassificacaoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+
+@Tag(name = "Classificacao endpoint")
 @RestController
 @RequestMapping("/api/classificacao")
 public class ClassificacaoController {

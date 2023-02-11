@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Bebe;
 import br.com.fiap.whycry.service.BebeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Bebe endpoint")
 @RestController
 @RequestMapping("/api/bebe")
 public class BebeController {

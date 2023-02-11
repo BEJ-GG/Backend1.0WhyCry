@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Agenda;
 import br.com.fiap.whycry.service.AgendaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Agenda endpoint")
 @RestController
 @RequestMapping("/api/agenda/")
 public class AgendaController {

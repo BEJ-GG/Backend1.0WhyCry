@@ -1,0 +1,19 @@
+#spring:
+#  data:
+#      mongodb:
+#        username: admin
+#        password: admin312
+#        uri: mongodb+srv://admin:admin123@dbwhycry.g1j98ut.mongodb.net/?retryWrites=true&w=majority
+#        database: dbWhycry
+#        host: 27017
+        
+
+#spring:
+#  data:
+#    mongodb:
+#      authentication-database: admin
+#      username: #your_root_user     (default->rootuser)
+#      password: #your_root_password (default->rootpass)
+#      database: #your_db_name
+#      port: #your_port              (default->27017)
+#      host: #your_host              (default->localhost)

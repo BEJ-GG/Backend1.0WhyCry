@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,56 +19,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Arquivo;
 import br.com.fiap.whycry.service.ArquivoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/arquivo")
+@RequestMapping("/v1")
+@Tag(name = "Arquivo")
 public class ArquivoController {
-    
-    @Autowired
-    ArquivoService service;
 
-    @GetMapping
-    public List<Arquivo> index(){
-        return service.listAll();
-    }
+	@Autowired
+	ArquivoService arquivoService;
 
-    @PostMapping
-    public ResponseEntity<Arquivo> create(@RequestBody @Valid Arquivo arq){
-        service.save(arq);
-        return ResponseEntity.status(HttpStatus.CREATED).body(arq);
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<Arquivo> show(@PathVariable Long id) {
-        return ResponseEntity.of(service.getById(id));
-    }
-    @PutMapping("{id}")
-    public ResponseEntity<Arquivo> update(@PathVariable Long id, @RequestBody @Valid Arquivo newArquivo){
-        // buscar a tarefa no BD
-        Optional<Arquivo> optional = service.getById(id);
+	@Operation(summary = "Listar arquivos")
+	@GetMapping("/arquivo")
+	public List<Arquivo> listarAruqivos() {
+		return this.arquivoService.listarArquivos();
+	}
 
-        // verificar se existe usuario com esse id
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	@Operation(summary = "Incluir arquivo")
+	@PostMapping
+	public Arquivo incluirArquivos(@RequestBody @Valid Arquivo arquivo) {
 
-        // atualizar os dados no objeto
-        var agenda = optional.get();
-        BeanUtils.copyProperties(newArquivo, agenda);
-        agenda.setCd_arquivo(id);
+		return this.arquivoService.incluirArquivo(arquivo);
+	}
 
-        // salvar no BD
-        service.save(agenda);
+	@Operation(summary = "Buscar arquivo por ID")
+	@GetMapping("/arquivo/{id}")
+	public ResponseEntity<Arquivo> buscarArquivo(@PathVariable String id) {
+		Arquivo arquivo = this.arquivoService.buscarArquivo(id);
+		return ResponseEntity.status(HttpStatus.OK).body(arquivo);
+	}
 
-        return ResponseEntity.ok(agenda);
-    }
-    @DeleteMapping("{id}")
-    public ResponseEntity<Object> destroy(@PathVariable Long id){
+	@Operation(summary = "Alterar arquivo")
+	@PutMapping("/arquivo{id}")
+	public Arquivo alterarArquivo(@PathVariable String id, @RequestBody Arquivo arquivo) {
 
-        Optional<Arquivo> optional = service.getById(id);
+		return this.arquivoService.alterarArquivo(arquivo, id);
+	}
 
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	@Operation(summary = "Remover arquivo")
+	@DeleteMapping("/arquivo/{id}")
+	public Optional<Arquivo> destroy(@PathVariable String id) {
 
-        service.deleteById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+		return this.arquivoService.removerArquivo(id);
+	}
 }

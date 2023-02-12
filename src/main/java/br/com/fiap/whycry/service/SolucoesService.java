@@ -11,24 +11,39 @@ import br.com.fiap.whycry.repository.SolucoesRepository;
 
 @Service
 public class SolucoesService {
-    
-    @Autowired
-    SolucoesRepository repository;
 
-    public List<Solucoes> listAll(){
-        return repository.findAll();
-    }
+	@Autowired
+	SolucoesRepository solucoesRepository;
 
-    public void save(Solucoes log) {
-        repository.save(log);
-    }
+	public List<Solucoes> listarSolucoes() {
+		return solucoesRepository.findAll();
+	}
 
-    public Optional<Solucoes> getById(Long id) {
-        return repository.findById(id);
-    }
+	public Solucoes incluirSolucoes(Solucoes solucoes) {
+		return this.solucoesRepository.save(solucoes);
+	}
 
-    public void deleteById(Long id) {
-        repository.deleteById(id);
-    }
+	public Solucoes alterarSolucoes(Solucoes solucoes, String id) {
+		Solucoes solucoesDb = this.solucoesRepository.findById(solucoes.getId())
+				.orElseThrow(() -> new IllegalArgumentException(("Solução não encontrada")));
+
+		solucoesDb.setClassificacao(solucoes.getClassificacao());
+		solucoesDb.setDescricao(solucoes.getDescricao());
+		solucoesDb.setNome(solucoes.getNome());
+
+		return this.solucoesRepository.save(solucoes);
+
+	}
+
+	public Solucoes buscarSolucoes(String id) {
+		Optional<Solucoes> solucoes = this.solucoesRepository.findById(id);
+		return solucoes.get();
+	}
+
+	public Optional<Solucoes> removerSolucoes(String id) {
+		Optional<Solucoes> solucoes = this.solucoesRepository.findById(id);
+		this.solucoesRepository.deleteById(id);
+		return solucoes;
+	}
 
 }

@@ -13,22 +13,30 @@ import br.com.fiap.whycry.repository.ClienteRepository;
 public class ClienteService {
     
     @Autowired
-    ClienteRepository repository;
+    ClienteRepository clienteRepository;
 
     public List<Cliente> listAll(){
-        return repository.findAll();
+        return this.clienteRepository.findAll();
     }
 
-    public void save(Cliente task) {
-        repository.save(task);
+    public Cliente incluirCliente(Cliente cliente) {
+    	return this.clienteRepository.save(cliente);
+    }
+    
+	public Cliente alterarCliente(Cliente cliente, String id) {
+		return this.clienteRepository.save(cliente);
+
+	}
+
+    public Cliente buscarCliente(String id) {
+    	Optional<Cliente> cliente = this.clienteRepository.findById(id);
+        return cliente.get();
     }
 
-    public Optional<Cliente> getById(Long id) {
-        return repository.findById(id);
-    }
-
-    public void deleteById(Long id) {
-        repository.deleteById(id);
+    public Optional<Cliente> removerCliente(String id) {
+    	Optional<Cliente> cliente = this.clienteRepository.findById(id);
+    	this.clienteRepository.deleteById(id);
+    	return cliente;
     }
 
 }

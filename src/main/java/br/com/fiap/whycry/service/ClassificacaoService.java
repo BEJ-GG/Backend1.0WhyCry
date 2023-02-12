@@ -11,24 +11,32 @@ import br.com.fiap.whycry.repository.ClassificacaoRepository;
 
 @Service
 public class ClassificacaoService {
-    
-    @Autowired
-    ClassificacaoRepository repository;
 
-    public List<Classificacao> listAll(){
-        return repository.findAll();
-    }
-    public void save(Classificacao classifica) {
-        repository.save(classifica);
-    }
+	@Autowired
+	ClassificacaoRepository classificacaoRepository;
 
-    public Optional<Classificacao> getById(Long id) {
-        return repository.findById(id);
-    }
+	public List<Classificacao> listAll() {
+		return this.classificacaoRepository.findAll();
+	}
 
-    public void deleteById(Long id) {
-        repository.deleteById(id);
-    }
+	public Classificacao incluirClassificacao(Classificacao classificao) {
+		return this.classificacaoRepository.save(classificao);
+	}
 
+	public Classificacao alterarAvaliacao(Classificacao classificao, String id) {
+		return this.classificacaoRepository.save(classificao);
+	}
+
+	public Classificacao buscarClassificacao(String id) {
+		Optional<Classificacao> classificacao = this.classificacaoRepository.findById(id);
+
+		return classificacao.get();
+	}
+
+	public Optional<Classificacao> removerClassificacao(String id) {
+		Optional<Classificacao> classificacao = this.classificacaoRepository.findById(id);
+		this.classificacaoRepository.deleteById(id);
+		return classificacao;
+	}
 
 }

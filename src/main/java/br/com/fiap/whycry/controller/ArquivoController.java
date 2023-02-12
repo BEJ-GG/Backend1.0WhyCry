@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,64 +22,45 @@ import br.com.fiap.whycry.service.ArquivoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Arquivo")
 @RestController
-@RequestMapping("/api/arquivo")
+@RequestMapping("/v1")
+@Tag(name = "Arquivo")
 public class ArquivoController {
 
 	@Autowired
-	ArquivoService service;
+	ArquivoService arquivoService;
 
-	@Operation(summary = "")
-	@GetMapping
-	public List<Arquivo> index() {
-		return service.listAll();
+	@Operation(summary = "Listar arquivos")
+	@GetMapping("/arquivo")
+	public List<Arquivo> listarAruqivos() {
+		return this.arquivoService.listarArquivos();
 	}
 
-	@Operation(summary = "")
+	@Operation(summary = "Incluir arquivo")
 	@PostMapping
-	public ResponseEntity<Arquivo> create(@RequestBody @Valid Arquivo arq) {
-		service.save(arq);
-		return ResponseEntity.status(HttpStatus.CREATED).body(arq);
+	public Arquivo incluirArquivos(@RequestBody @Valid Arquivo arquivo) {
+
+		return this.arquivoService.incluirArquivo(arquivo);
 	}
 
-	@Operation(summary = "")
-	@GetMapping("{id}")
-	public ResponseEntity<Arquivo> show(@PathVariable Long id) {
-		return ResponseEntity.of(service.getById(id));
+	@Operation(summary = "Buscar arquivo por ID")
+	@GetMapping("/arquivo/{id}")
+	public ResponseEntity<Arquivo> buscarArquivo(@PathVariable String id) {
+		Arquivo arquivo = this.arquivoService.buscarArquivo(id);
+		return ResponseEntity.status(HttpStatus.OK).body(arquivo);
 	}
 
-	@Operation(summary = "")
-	@PutMapping("{id}")
-	public ResponseEntity<Arquivo> update(@PathVariable Long id, @RequestBody @Valid Arquivo newArquivo) {
-		// buscar a tarefa no BD
-		Optional<Arquivo> optional = service.getById(id);
+	@Operation(summary = "Alterar arquivo")
+	@PutMapping("/arquivo{id}")
+	public Arquivo alterarArquivo(@PathVariable String id, @RequestBody Arquivo arquivo) {
 
-		// verificar se existe usuario com esse id
-		if (optional.isEmpty())
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-		// atualizar os dados no objeto
-		var agenda = optional.get();
-		BeanUtils.copyProperties(newArquivo, agenda);
-		agenda.setCd_arquivo(id);
-
-		// salvar no BD
-		service.save(agenda);
-
-		return ResponseEntity.ok(agenda);
+		return this.arquivoService.alterarArquivo(arquivo, id);
 	}
 
-	@Operation(summary = "")
-	@DeleteMapping("{id}")
-	public ResponseEntity<Object> destroy(@PathVariable Long id) {
+	@Operation(summary = "Remover arquivo")
+	@DeleteMapping("/arquivo/{id}")
+	public Optional<Arquivo> destroy(@PathVariable String id) {
 
-		Optional<Arquivo> optional = service.getById(id);
-
-		if (optional.isEmpty())
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-		service.deleteById(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		return this.arquivoService.removerArquivo(id);
 	}
 }

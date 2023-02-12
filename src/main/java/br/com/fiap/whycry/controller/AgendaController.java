@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @CrossOrigin
 @RequestMapping("/v1")
-@Tag(name = "Agenda endpoint")
+@Tag(name = "Agenda")
 public class AgendaController {
 
 	@Autowired

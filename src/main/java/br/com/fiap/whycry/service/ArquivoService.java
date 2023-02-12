@@ -20,7 +20,7 @@ public class ArquivoService {
 	@Autowired
 	BebeRepository bebeRepository;
 
-	public List<Arquivo> listAll() {
+	public List<Arquivo> listarArquivos() {
 		return arquivoRepository.findAll();
 	}
 
@@ -44,7 +44,7 @@ public class ArquivoService {
 
 	}
 
-	public Arquivo buscarBebe(String id) {
+	public Arquivo buscarArquivo(String id) {
 		Optional<Arquivo> arquivo = this.arquivoRepository.findById(id);
 
 		return arquivo.get();

@@ -27,18 +27,20 @@ public class BebeService {
 	public Bebe incluirBebe(Bebe bebe) {
 		Cliente cliente = this.clienteRepository.findById(bebe.getCliente().getId())
 				.orElseThrow(() -> new IllegalArgumentException(("Cliente não encontrado")));
-		;
 
 		bebe.setCliente(cliente);
 		return this.bebeRepository.save(bebe);
 	}
 
-	public Optional<Bebe> getById(Long id) {
-		return this.bebeRepository.findById(id);
+	public Bebe buscarBebe(String id) {
+		Optional<Bebe> bebe = this.bebeRepository.findById(id);
+		return bebe.get();
 	}
 
-	public void deleteById(Long id) {
-		return this.bebeRepository.deleteById(id);
+	public Optional<Bebe> removerBebe(String id) {
+		Optional<Bebe> bebe = this.bebeRepository.findById(id);
+		this.bebeRepository.deleteById(id);
+		return bebe;
 	}
 
 }

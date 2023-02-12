@@ -40,6 +40,6 @@ public class Cliente {
 	
 	@Lob
 	@Field
-	private byte[] ds_imagem;
+	private byte[] imagem;
 
 }

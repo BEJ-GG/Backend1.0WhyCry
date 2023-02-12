@@ -23,9 +23,9 @@ import br.com.fiap.whycry.service.ChoroService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Choro endpoint")
 @RestController
-@RequestMapping("/api/choro")
+@RequestMapping("/v1")
+@Tag(name = "Choro")
 public class ChoroController {
     
     @Autowired

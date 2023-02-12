@@ -50,26 +50,12 @@ public class AvaliacaoController {
 		return ResponseEntity.of(service.getById(id));
 	}
 
-	@Operation(summary = "")
-	@PutMapping("{id}")
-	public ResponseEntity<Avaliacao> update(@PathVariable Long id, @RequestBody @Valid Avaliacao newArquivo) {
-		// buscar a tarefa no BD
-		Optional<Avaliacao> optional = service.getById(id);
-
-		// verificar se existe usuario com esse id
-		if (optional.isEmpty())
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-		// atualizar os dados no objeto
-		var avaliacao = optional.get();
-		BeanUtils.copyProperties(newArquivo, avaliacao);
-		avaliacao.setCd_avaliacao(id);
-
-		// salvar no BD
-		service.save(avaliacao);
-
-		return ResponseEntity.ok(avaliacao);
-	}
+//	@Operation(summary = "")
+//	@PutMapping("{id}")
+//	public ResponseEntity<Avaliacao> update(@PathVariable Long id, @RequestBody @Valid Avaliacao newArquivo) {
+//
+//		return ResponseEntity.ok(avaliacao);
+//	}
 
 	@Operation(summary = "")
 	@DeleteMapping("{id}")

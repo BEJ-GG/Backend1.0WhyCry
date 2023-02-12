@@ -11,24 +11,33 @@ import br.com.fiap.whycry.repository.AvaliacaoRepository;
 
 @Service
 public class AvaliacaoService {
-    
-    @Autowired
-    AvaliacaoRepository repository;
 
-    public List<Avaliacao> listAll(){
-        return repository.findAll();
-    }
+	@Autowired
+	AvaliacaoRepository avaliacaoRepository;
 
-    public void save(Avaliacao arq){
-        repository.save(arq);
-    }
-    
-    public Optional<Avaliacao> getById(Long id){
-        return repository.findById(id);
-    }
+	public List<Avaliacao> listAll() {
+		return this.avaliacaoRepository.findAll();
+	}
 
-    public void deleteById(Long id){
-        repository.deleteById(id);
-    }
+	public Avaliacao incluirArquivo(Avaliacao avaliacao) {
+		return this.avaliacaoRepository.save(avaliacao);
+	}
+	
+	public Avaliacao alterarAvaliacao(Avaliacao avaliacao, String id) {
+		return this.avaliacaoRepository.save(avaliacao);
+
+	}
+
+	public Avaliacao buscarAvaliacao(String id) {
+		Optional<Avaliacao> avaliacao = this.avaliacaoRepository.findById(id);
+
+		return avaliacao.get();
+	}
+
+	public Optional<Avaliacao> removerAvaliacao(String id) {
+		Optional<Avaliacao> avaliacao = this.avaliacaoRepository.findById(id);
+		this.avaliacaoRepository.deleteById(id);
+		return avaliacao;
+	}
 
 }

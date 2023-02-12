@@ -23,7 +23,7 @@ import br.com.fiap.whycry.service.ArquivoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Arquivo endpoint")
+@Tag(name = "Arquivo")
 @RestController
 @RequestMapping("/api/arquivo")
 public class ArquivoController {

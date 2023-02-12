@@ -32,6 +32,20 @@ public class BebeService {
 		return this.bebeRepository.save(bebe);
 	}
 
+	public Bebe alterarBebe(Bebe bebe, String id) {
+		Bebe bebeDb = this.bebeRepository.findById(bebe.getId())
+				.orElseThrow(() -> new IllegalArgumentException(("Agenda não encontrada")));
+		;
+
+		bebeDb.setCliente(bebe.getCliente());
+		bebeDb.setDataNasc(bebe.getDataNasc());
+		bebeDb.setGenero(bebe.getGenero());
+		bebeDb.setNome(bebe.getNome());
+
+		return this.bebeRepository.save(bebe);
+
+	}
+
 	public Bebe buscarBebe(String id) {
 		Optional<Bebe> bebe = this.bebeRepository.findById(id);
 		return bebe.get();

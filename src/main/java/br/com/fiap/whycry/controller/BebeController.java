@@ -3,9 +3,6 @@ package br.com.fiap.whycry.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,65 +20,44 @@ import br.com.fiap.whycry.service.BebeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Bebe endpoint")
 @RestController
-@RequestMapping("/api/bebe")
+@RequestMapping("/v1")
+@Tag(name = "Bebe")
 public class BebeController {
 
 	@Autowired
-	public BebeService service;
+	public BebeService bebeService;
 
-	@Operation(summary = "")
-	@GetMapping
-	public List<Bebe> index() {
-		return service.listAll();
+	@Operation(summary = "Incluir bebe")
+	@GetMapping("/bebe")
+	public List<Bebe> listarBebes() {
+		return this.bebeService.listarBebes();
 	}
 
-	@Operation(summary = "")
-	@PostMapping
-	public ResponseEntity<Bebe> create(@RequestBody @Valid Bebe bebe) {
-		service.save(bebe);
-		return ResponseEntity.status(HttpStatus.CREATED).body(bebe);
+	@Operation(summary = "Incluir bebe")
+	@PostMapping("/bebe")
+	public Bebe incluirBebe(@RequestBody Bebe bebe) {
+		return this.bebeService.incluirBebe(bebe);
 	}
 
-	@Operation(summary = "")
-	@GetMapping("{id}")
-	public ResponseEntity<Bebe> show(@PathVariable Long id) {
-		return ResponseEntity.of(service.getById(id));
+	@Operation(summary = "Buscar bebe por ID")
+	@GetMapping("/bebe/{id}")
+	public ResponseEntity<Bebe> buscarBebe(@PathVariable String id) {
+		Bebe bebe = this.bebeService.buscarBebe(id);
+		return ResponseEntity.status(HttpStatus.OK).body(bebe);
 	}
 
-	@Operation(summary = "")
-	@PutMapping("{id}")
-	public ResponseEntity<Bebe> update(@PathVariable Long id, @RequestBody @Valid Bebe newBebe) {
-		// buscar a tarefa no BD
-		Optional<Bebe> optional = service.getById(id);
-
-		// verificar se existe usuario com esse id
-		if (optional.isEmpty())
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-		// atualizar os dados no objeto
-		var bebe = optional.get();
-		BeanUtils.copyProperties(newBebe, bebe);
-		bebe.setCd_bebe(id);
-
-		// salvar no BD
-		service.save(bebe);
-
-		return ResponseEntity.ok(bebe);
+	@Operation(summary = "Alterar bebe")
+	@PutMapping("/bebe/{id}")
+	public Bebe alterarBebe(@PathVariable String id, @RequestBody Bebe bebe) {
+		return this.bebeService.alterarBebe(bebe, id);
 	}
 
-	@Operation(summary = "")
-	@DeleteMapping("{id}")
-	public ResponseEntity<Object> destroy(@PathVariable Long id) {
+	@Operation(summary = "Remover bebe")
+	@DeleteMapping("/bebe/{id}")
+	public Optional<Bebe> destroy(@PathVariable String id) {
 
-		Optional<Bebe> optional = service.getById(id);
-
-		if (optional.isEmpty())
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-		service.deleteById(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		return this.bebeService.removerBebe(id);
 	}
 
 }

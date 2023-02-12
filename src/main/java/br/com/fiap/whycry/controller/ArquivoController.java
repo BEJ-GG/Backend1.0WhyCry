@@ -20,58 +20,67 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Arquivo;
 import br.com.fiap.whycry.service.ArquivoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Arquivo endpoint")
 @RestController
 @RequestMapping("/api/arquivo")
 public class ArquivoController {
-    
-    @Autowired
-    ArquivoService service;
 
-    @GetMapping
-    public List<Arquivo> index(){
-        return service.listAll();
-    }
+	@Autowired
+	ArquivoService service;
 
-    @PostMapping
-    public ResponseEntity<Arquivo> create(@RequestBody @Valid Arquivo arq){
-        service.save(arq);
-        return ResponseEntity.status(HttpStatus.CREATED).body(arq);
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<Arquivo> show(@PathVariable Long id) {
-        return ResponseEntity.of(service.getById(id));
-    }
-    @PutMapping("{id}")
-    public ResponseEntity<Arquivo> update(@PathVariable Long id, @RequestBody @Valid Arquivo newArquivo){
-        // buscar a tarefa no BD
-        Optional<Arquivo> optional = service.getById(id);
+	@Operation(summary = "")
+	@GetMapping
+	public List<Arquivo> index() {
+		return service.listAll();
+	}
 
-        // verificar se existe usuario com esse id
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	@Operation(summary = "")
+	@PostMapping
+	public ResponseEntity<Arquivo> create(@RequestBody @Valid Arquivo arq) {
+		service.save(arq);
+		return ResponseEntity.status(HttpStatus.CREATED).body(arq);
+	}
 
-        // atualizar os dados no objeto
-        var agenda = optional.get();
-        BeanUtils.copyProperties(newArquivo, agenda);
-        agenda.setCd_arquivo(id);
+	@Operation(summary = "")
+	@GetMapping("{id}")
+	public ResponseEntity<Arquivo> show(@PathVariable Long id) {
+		return ResponseEntity.of(service.getById(id));
+	}
 
-        // salvar no BD
-        service.save(agenda);
+	@Operation(summary = "")
+	@PutMapping("{id}")
+	public ResponseEntity<Arquivo> update(@PathVariable Long id, @RequestBody @Valid Arquivo newArquivo) {
+		// buscar a tarefa no BD
+		Optional<Arquivo> optional = service.getById(id);
 
-        return ResponseEntity.ok(agenda);
-    }
-    @DeleteMapping("{id}")
-    public ResponseEntity<Object> destroy(@PathVariable Long id){
+		// verificar se existe usuario com esse id
+		if (optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
-        Optional<Arquivo> optional = service.getById(id);
+		// atualizar os dados no objeto
+		var agenda = optional.get();
+		BeanUtils.copyProperties(newArquivo, agenda);
+		agenda.setCd_arquivo(id);
 
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		// salvar no BD
+		service.save(agenda);
 
-        service.deleteById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+		return ResponseEntity.ok(agenda);
+	}
+
+	@Operation(summary = "")
+	@DeleteMapping("{id}")
+	public ResponseEntity<Object> destroy(@PathVariable Long id) {
+
+		Optional<Arquivo> optional = service.getById(id);
+
+		if (optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+		service.deleteById(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
 }

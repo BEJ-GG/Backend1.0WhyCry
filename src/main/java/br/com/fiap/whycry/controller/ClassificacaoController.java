@@ -20,58 +20,67 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Classificacao;
 import br.com.fiap.whycry.service.ClassificacaoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 
 @Tag(name = "Classificacao endpoint")
 @RestController
 @RequestMapping("/api/classificacao")
 public class ClassificacaoController {
 
-    @Autowired
-    private ClassificacaoService service;
+	@Autowired
+	private ClassificacaoService service;
 
-    @GetMapping
-    public List<Classificacao> index(){
-        return service.listAll();
-    }
-    @PostMapping
-    public ResponseEntity<Classificacao> create(@RequestBody @Valid Classificacao cla){
-        service.save(cla);
-        return ResponseEntity.status(HttpStatus.CREATED).body(cla);
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<Classificacao> show(@PathVariable Long id) {
-        return ResponseEntity.of(service.getById(id));
-    }
-    @PutMapping("{id}")
-    public ResponseEntity<Classificacao> update(@PathVariable Long id, @RequestBody @Valid Classificacao newClas){
-        // buscar a tarefa no BD
-        Optional<Classificacao> optional = service.getById(id);
+	@Operation(summary = "")
+	@GetMapping
+	public List<Classificacao> index() {
+		return service.listAll();
+	}
 
-        // verificar se existe usuario com esse id
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	@Operation(summary = "")
+	@PostMapping
+	public ResponseEntity<Classificacao> create(@RequestBody @Valid Classificacao cla) {
+		service.save(cla);
+		return ResponseEntity.status(HttpStatus.CREATED).body(cla);
+	}
 
-        // atualizar os dados no objeto
-        var clas = optional.get();
-        BeanUtils.copyProperties(newClas, clas);
-        clas.setCd_classificacao(id);
+	@Operation(summary = "")
+	@GetMapping("{id}")
+	public ResponseEntity<Classificacao> show(@PathVariable Long id) {
+		return ResponseEntity.of(service.getById(id));
+	}
 
-        // salvar no BD
-        service.save(clas);
+	@Operation(summary = "")
+	@PutMapping("{id}")
+	public ResponseEntity<Classificacao> update(@PathVariable Long id, @RequestBody @Valid Classificacao newClas) {
+		// buscar a tarefa no BD
+		Optional<Classificacao> optional = service.getById(id);
 
-        return ResponseEntity.ok(clas);
-    }
-    @DeleteMapping("{id}")
-    public ResponseEntity<Object> destroy(@PathVariable Long id){
+		// verificar se existe usuario com esse id
+		if (optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
-        Optional<Classificacao> optional = service.getById(id);
+		// atualizar os dados no objeto
+		var clas = optional.get();
+		BeanUtils.copyProperties(newClas, clas);
+		clas.setCd_classificacao(id);
 
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		// salvar no BD
+		service.save(clas);
 
-        service.deleteById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+		return ResponseEntity.ok(clas);
+	}
+
+	@Operation(summary = "")
+	@DeleteMapping("{id}")
+	public ResponseEntity<Object> destroy(@PathVariable Long id) {
+
+		Optional<Classificacao> optional = service.getById(id);
+
+		if (optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+		service.deleteById(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
 }

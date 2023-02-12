@@ -20,59 +20,68 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Avaliacao;
 import br.com.fiap.whycry.service.AvaliacaoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Avaliacao endpoint")
 @RestController
 @RequestMapping("/api/avaliacao")
 public class AvaliacaoController {
-    
-    @Autowired
-    AvaliacaoService service;
 
-    @GetMapping
-    public List<Avaliacao> index(){
-        return service.listAll();
-    }
+	@Autowired
+	AvaliacaoService service;
 
-    @PostMapping
-    public ResponseEntity<Avaliacao> create(@RequestBody @Valid Avaliacao ava){
-        service.save(ava);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ava);
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<Avaliacao> show(@PathVariable Long id) {
-        return ResponseEntity.of(service.getById(id));
-    }
-    @PutMapping("{id}")
-    public ResponseEntity<Avaliacao> update(@PathVariable Long id, @RequestBody @Valid Avaliacao newArquivo){
-        // buscar a tarefa no BD
-        Optional<Avaliacao> optional = service.getById(id);
+	@Operation(summary = "")
+	@GetMapping
+	public List<Avaliacao> index() {
+		return service.listAll();
+	}
 
-        // verificar se existe usuario com esse id
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	@Operation(summary = "")
+	@PostMapping
+	public ResponseEntity<Avaliacao> create(@RequestBody @Valid Avaliacao ava) {
+		service.save(ava);
+		return ResponseEntity.status(HttpStatus.CREATED).body(ava);
+	}
 
-        // atualizar os dados no objeto
-        var avaliacao = optional.get();
-        BeanUtils.copyProperties(newArquivo, avaliacao);
-        avaliacao.setCd_avaliacao(id);
+	@Operation(summary = "")
+	@GetMapping("{id}")
+	public ResponseEntity<Avaliacao> show(@PathVariable Long id) {
+		return ResponseEntity.of(service.getById(id));
+	}
 
-        // salvar no BD
-        service.save(avaliacao);
+	@Operation(summary = "")
+	@PutMapping("{id}")
+	public ResponseEntity<Avaliacao> update(@PathVariable Long id, @RequestBody @Valid Avaliacao newArquivo) {
+		// buscar a tarefa no BD
+		Optional<Avaliacao> optional = service.getById(id);
 
-        return ResponseEntity.ok(avaliacao);
-    }
-    @DeleteMapping("{id}")
-    public ResponseEntity<Object> destroy(@PathVariable Long id){
+		// verificar se existe usuario com esse id
+		if (optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
-        Optional<Avaliacao> optional = service.getById(id);
+		// atualizar os dados no objeto
+		var avaliacao = optional.get();
+		BeanUtils.copyProperties(newArquivo, avaliacao);
+		avaliacao.setCd_avaliacao(id);
 
-        if(optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		// salvar no BD
+		service.save(avaliacao);
 
-        service.deleteById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+		return ResponseEntity.ok(avaliacao);
+	}
+
+	@Operation(summary = "")
+	@DeleteMapping("{id}")
+	public ResponseEntity<Object> destroy(@PathVariable Long id) {
+
+		Optional<Avaliacao> optional = service.getById(id);
+
+		if (optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+		service.deleteById(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
 
 }

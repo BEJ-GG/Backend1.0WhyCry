@@ -2,33 +2,56 @@ package br.com.fiap.whycry.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.fiap.whycry.model.Agenda;
+import br.com.fiap.whycry.model.Bebe;
 import br.com.fiap.whycry.repository.AgendaRepository;
+import br.com.fiap.whycry.repository.BebeRepository;
 
 @Service
 public class AgendaService {
-    
-    @Autowired
-    AgendaRepository repository;
 
-    public List<Agenda> listAll(){
-        return repository.findAll();
-    }
+	@Autowired
+	AgendaRepository agendaRepository;
 
-    public void save(Agenda agenda) {
-        repository.save(agenda);
-    }
+	@Autowired
+	BebeRepository bebeRepository;
 
-    public Optional<Agenda> getById(Long id) {
-        return repository.findById(id);
-    }
+	public List<Agenda> listarAgenda() {
+		return this.agendaRepository.findAll();
+	}
 
-    public void deleteById(Long id) {
-        repository.deleteById(id);
-    }
+	public Agenda incluirAgenda(Agenda agenda) {
+		Bebe bebe = this.bebeRepository.findById(agenda.getBebe().getId())
+				.orElseThrow(() -> new IllegalArgumentException(("Bebe não encontrado")));
+		agenda.setBebe(bebe);
+		return this.agendaRepository.save(agenda);
+	}
+
+	public Agenda alterarAgenda(Agenda agenda, String id) {
+		Agenda agendaDb = this.agendaRepository.findById(agenda.getId())
+				.orElseThrow(() -> new IllegalArgumentException(("Agenda não encontrada")));
+		;
+
+		agendaDb.setBebe(agenda.getBebe());
+		agendaDb.setDataHrs(agenda.getDataHrs());
+		agendaDb.setDescricao(agenda.getDescricao());
+
+		return this.agendaRepository.save(agenda);
+
+	}
+
+	public Agenda buscarAgenda(String id) {
+		Optional<Agenda> agenda = this.agendaRepository.findById(id);
+		return agenda.get();
+	}
+
+	public Optional<Agenda> removerAgenda(String id) {
+		Optional<Agenda> agenda = this.agendaRepository.findById(id);
+		this.agendaRepository.deleteById(id);
+		return agenda;
+
+	}
 
 }

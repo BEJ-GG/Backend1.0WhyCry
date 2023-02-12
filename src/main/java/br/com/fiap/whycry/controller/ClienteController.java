@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Cliente;
 import br.com.fiap.whycry.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Cliente endpoint")
@@ -30,19 +31,23 @@ public class ClienteController {
     @Autowired
     private ClienteService service;
 
+    @Operation(summary = "")
     @GetMapping
     public List<Cliente> index(){
         return service.listAll();
     }
+    @Operation(summary = "")
     @PostMapping
     public ResponseEntity<Cliente> create(@RequestBody @Valid Cliente user){
         service.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
+    @Operation(summary = "")
     @GetMapping("{id}")
     public ResponseEntity<Cliente> show(@PathVariable Long id) {
         return ResponseEntity.of(service.getById(id));
     }
+    @Operation(summary = "")
     @PutMapping("{id}")
     public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody @Valid Cliente newUser){
         // buscar a tarefa no BD
@@ -62,6 +67,7 @@ public class ClienteController {
 
         return ResponseEntity.ok(user);
     }
+    @Operation(summary = "")
     @DeleteMapping("{id}")
     public ResponseEntity<Object> destroy(@PathVariable Long id){
 

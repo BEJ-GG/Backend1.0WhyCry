@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.whycry.model.Choro;
 import br.com.fiap.whycry.service.ChoroService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Choro endpoint")
@@ -29,21 +30,23 @@ public class ChoroController {
     
     @Autowired
     ChoroService service;
-
+    @Operation(summary = "")
     @GetMapping
     public List<Choro> index(){
         return service.listAll();
     }
-
+    @Operation(summary = "")
     @PostMapping
     public ResponseEntity<Choro> create(@RequestBody @Valid Choro choro){
         service.save(choro);
         return ResponseEntity.status(HttpStatus.CREATED).body(choro);
     }
+    @Operation(summary = "")
     @GetMapping("{id}")
     public ResponseEntity<Choro> show(@PathVariable Long id) {
         return ResponseEntity.of(service.getById(id));
     }
+    @Operation(summary = "")
     @PutMapping("{id}")
     public ResponseEntity<Choro> update(@PathVariable Long id, @RequestBody @Valid Choro newChoro){
         // buscar a tarefa no BD
@@ -63,6 +66,7 @@ public class ChoroController {
 
         return ResponseEntity.ok(choro);
     }
+    @Operation(summary = "")
     @DeleteMapping("{id}")
     public ResponseEntity<Object> destroy(@PathVariable Long id){
 

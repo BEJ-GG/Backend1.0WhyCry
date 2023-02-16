@@ -15,7 +15,7 @@ public class ChoroService {
 	@Autowired
 	ChoroRepository choroRepository;
 
-	public List<Choro> listAll() {
+	public List<Choro> listarChoros() {
 		return this.choroRepository.findAll();
 	}
 

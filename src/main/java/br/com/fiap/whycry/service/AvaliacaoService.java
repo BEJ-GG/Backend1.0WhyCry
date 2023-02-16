@@ -15,11 +15,11 @@ public class AvaliacaoService {
 	@Autowired
 	AvaliacaoRepository avaliacaoRepository;
 
-	public List<Avaliacao> listAll() {
+	public List<Avaliacao> listarAvaliacoes() {
 		return this.avaliacaoRepository.findAll();
 	}
 
-	public Avaliacao incluirArquivo(Avaliacao avaliacao) {
+	public Avaliacao incluirAvaliacao(Avaliacao avaliacao) {
 		return this.avaliacaoRepository.save(avaliacao);
 	}
 	

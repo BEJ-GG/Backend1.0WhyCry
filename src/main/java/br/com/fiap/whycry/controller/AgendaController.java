@@ -57,7 +57,7 @@ public class AgendaController {
 
 	@Operation(summary = "Remover agenda por ID")
 	@DeleteMapping("/agenda/{id}")
-	public Optional<Agenda> destroy(@PathVariable String id) {
+	public Optional<Agenda> removerAgenda(@PathVariable String id) {
 		return this.agendaService.removerAgenda(id);
 	}
 }

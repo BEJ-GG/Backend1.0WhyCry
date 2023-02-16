@@ -15,7 +15,7 @@ public class ClassificacaoService {
 	@Autowired
 	ClassificacaoRepository classificacaoRepository;
 
-	public List<Classificacao> listAll() {
+	public List<Classificacao> listarClassificacoes() {
 		return this.classificacaoRepository.findAll();
 	}
 
@@ -23,7 +23,7 @@ public class ClassificacaoService {
 		return this.classificacaoRepository.save(classificao);
 	}
 
-	public Classificacao alterarAvaliacao(Classificacao classificao, String id) {
+	public Classificacao alterarClassificacao(Classificacao classificao, String id) {
 		return this.classificacaoRepository.save(classificao);
 	}
 

@@ -55,7 +55,7 @@ public class BebeController {
 
 	@Operation(summary = "Remover bebe")
 	@DeleteMapping("/bebe/{id}")
-	public Optional<Bebe> destroy(@PathVariable String id) {
+	public Optional<Bebe> removerBebe(@PathVariable String id) {
 
 		return this.bebeService.removerBebe(id);
 	}

@@ -32,12 +32,12 @@ public class ArquivoController {
 
 	@Operation(summary = "Listar arquivos")
 	@GetMapping("/arquivo")
-	public List<Arquivo> listarAruqivos() {
+	public List<Arquivo> listarArquivos() {
 		return this.arquivoService.listarArquivos();
 	}
 
 	@Operation(summary = "Incluir arquivo")
-	@PostMapping
+	@PostMapping("/arquivo")
 	public Arquivo incluirArquivos(@RequestBody @Valid Arquivo arquivo) {
 
 		return this.arquivoService.incluirArquivo(arquivo);
@@ -59,7 +59,7 @@ public class ArquivoController {
 
 	@Operation(summary = "Remover arquivo")
 	@DeleteMapping("/arquivo/{id}")
-	public Optional<Arquivo> destroy(@PathVariable String id) {
+	public Optional<Arquivo> removerArquivo(@PathVariable String id) {
 
 		return this.arquivoService.removerArquivo(id);
 	}

@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "spring.springdoc.show-actuator",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.springdoc.show-actuator'"
+  },
+  {
+    "name": "spring.server.port",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.port'"
+  },
+  {
+    "name": "spring.management.endpoints.web.exposure.include",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.management.endpoints.web.exposure.include'"
+  },
+  {
+    "name": "spring.server.error.include-stacktrace",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.error.include-stacktrace'"
+  },
+  {
+    "name": "spring.management.health.defaults.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.management.health.defaults.enabled'"
+  },
+  {
+    "name": "spring.management.endpoint.metrics.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.management.endpoint.metrics.enabled'"
+  }
+]}

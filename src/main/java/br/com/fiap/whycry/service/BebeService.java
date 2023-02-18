@@ -38,7 +38,7 @@ public class BebeService {
 		;
 
 		bebeDb.setCliente(bebe.getCliente());
-		bebeDb.setDataNasc(bebe.getDataNasc());
+		bebeDb.setDataNascimento(bebe.getDataNascimento());
 		bebeDb.setGenero(bebe.getGenero());
 		bebeDb.setNome(bebe.getNome());
 

@@ -40,7 +40,7 @@ public class ArquivoService {
 		arquivoDb.setBebe(arquivo.getBebe());
 		arquivoDb.setDataArquivo(arquivo.getDataArquivo());
 		arquivoDb.setDescricao(arquivo.getDescricao());
-		arquivoDb.setNome(arquivo.getNome());
+		arquivoDb.setTitulo(arquivo.getTitulo());
 
 		return this.arquivoRepository.save(arquivo);
 

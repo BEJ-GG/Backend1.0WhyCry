@@ -35,7 +35,7 @@ public class AgendaService {
 		;
 
 		agendaDb.setBebe(agenda.getBebe());
-		agendaDb.setDataHrs(agenda.getDataHrs());
+		agendaDb.setDataHora(agenda.getDataHora());
 		agendaDb.setDescricao(agenda.getDescricao());
 
 		return this.agendaRepository.save(agenda);

@@ -13,18 +13,17 @@ public class Arquivo {
 
 	@MongoId
 	private String id;
-	
-	
+
 	@Field
-	private String nome;
-	
+	private String titulo;
+
 	@Field
 	private String descricao;
-	
+
 	@Field
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataArquivo;
-	
+
 	@Field
 	private Bebe bebe;
 

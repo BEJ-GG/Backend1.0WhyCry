@@ -31,7 +31,7 @@ public class AgendaController {
 
 	@Operation(summary = "Listando agendaa")
 	@GetMapping("/agenda")
-	public List<Agenda> listarAgenda() {
+	public List<Agenda> listarAgendas() {
 		return agendaService.listarAgenda();
 	}
 

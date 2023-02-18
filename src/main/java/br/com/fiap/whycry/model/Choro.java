@@ -11,6 +11,9 @@ public class Choro {
 
     @MongoId()
     private String id;
+    
+    @Field
+    private String titulo;
 
     @Field
     private String descricao;

@@ -23,7 +23,7 @@ public class Bebe {
 
 	@Field
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataNasc;
+	private LocalDate dataNascimento;
 
 	@Field
 	private Cliente cliente;

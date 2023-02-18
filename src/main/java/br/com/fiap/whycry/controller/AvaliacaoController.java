@@ -36,14 +36,14 @@ public class AvaliacaoController {
 		return this.avaliacaoService.listarAvaliacoes();
 	}
 
-	@Operation(summary = "Incluir Avaliacao")
+	@Operation(summary = "Incluir Avaliação")
 	@PostMapping("/avaliacao")
 	public Avaliacao incluirAvaliacao(@RequestBody @Valid Avaliacao avaliacao) {
 
 		return this.avaliacaoService.incluirAvaliacao(avaliacao);
 	}
 
-	@Operation(summary = "Buscar avaliacao porI D")
+	@Operation(summary = "Buscar avaliação porI D")
 	@GetMapping("/avaliacao/{id}")
 	public ResponseEntity<Avaliacao> buscarAvaliacoes(@PathVariable String id) {
 		Avaliacao avaliacao = this.avaliacaoService.buscarAvaliacao(id);
@@ -51,14 +51,14 @@ public class AvaliacaoController {
 		return ResponseEntity.status(HttpStatus.OK).body(avaliacao);
 	}
 
-	@Operation(summary = "Alterar avaliacao")
+	@Operation(summary = "Alterar avalição")
 	@PutMapping("/avaliacao/{id}")
 	public Avaliacao alterarAvaliacao(@PathVariable String id, @RequestBody @Valid Avaliacao avaliacao) {
 
 		return this.avaliacaoService.alterarAvaliacao(avaliacao, id);
 	}
 
-	@Operation(summary = "Remover avaliacao")
+	@Operation(summary = "Remover avaliação")
 	@DeleteMapping("/avaliacao/{id}")
 	public Optional<Avaliacao> removerAvaliacao(@PathVariable String id) {
 

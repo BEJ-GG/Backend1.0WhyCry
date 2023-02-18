@@ -46,7 +46,7 @@ public class ChoroService {
 				.orElseThrow(() -> new IllegalArgumentException(("Bebê não encontrado")));
 
 		Classificacao classficacao = this.classificacaoRepository.findById(choro.getClassficacao().getId())
-				.orElseThrow(() -> new IllegalArgumentException(("Classificação não encontrado")));
+				.orElseThrow(() -> new IllegalArgumentException(("Classificação não encontrada")));
 
 		choro.setAvaliacao(avaliacao);
 		choro.setBebe(bebe);
@@ -56,7 +56,7 @@ public class ChoroService {
 
 	public Choro alterarChoro(Choro choro, String id) {
 		Choro choroDb = this.choroRepository.findById(choro.getId())
-				.orElseThrow(() -> new IllegalArgumentException(("Choro não encontrada")));
+				.orElseThrow(() -> new IllegalArgumentException(("Choro não encontrado")));
 
 		choroDb.setAvaliacao(choro.getAvaliacao());
 		choroDb.setBebe(choro.getBebe());

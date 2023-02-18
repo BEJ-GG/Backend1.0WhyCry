@@ -14,6 +14,9 @@ public class Avaliacao {
     private String id;
     
     @Field
-    private char descricao;
+    private char nota;
+    
+    @Field
+    private String comentario;
 
 }

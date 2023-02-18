@@ -38,27 +38,27 @@ public class ClassificacaoController {
 		return classificacaoService.listarClassificacoes();
 	}
 
-	@Operation(summary = "Incluir classificacao")
+	@Operation(summary = "Incluir classificação")
 	@PostMapping("/classificacao")
 	public Classificacao incluirClassificacao(@RequestBody @Valid Classificacao classificacao) {
 		return this.classificacaoService.incluirClassificacao(classificacao);
 	}
 
-	@Operation(summary = "Buscar classificacao por ID")
+	@Operation(summary = "Buscar classificação por ID")
 	@GetMapping("/classificacao/{id}")
 	public ResponseEntity<Classificacao> buscarClasssificacao(@PathVariable String id) {
 		Classificacao classificacao = this.classificacaoService.buscarClassificacao(id);
 		return ResponseEntity.status(HttpStatus.OK).body(classificacao);
 	}
 
-	@Operation(summary = "Alterar classificacao")
+	@Operation(summary = "Alterar classificação")
 	@PutMapping("/classificacao/{id}")
 	public Classificacao alterarClassificacao(@PathVariable String id,
 			@RequestBody @Valid Classificacao classificacao) {
 		return this.classificacaoService.alterarClassificacao(classificacao, id);
 	}
 
-	@Operation(summary = "Remover classificacao")
+	@Operation(summary = "Remover classificaçao")
 	@DeleteMapping("/classificacao/{id}")
 	public Optional<Classificacao> removerClassificacao(@PathVariable String id) {
 

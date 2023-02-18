@@ -23,20 +23,17 @@ public class Cliente {
 	private String email;
 
 	@Field
-	private String cpf;
-
-	@Field
-	private String password;
-
-	@Field
 	private String telefone;
+	
+	@Field
+	private String genero;
+	
+	@Field
+	private String cpf;
 
 	@Field
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dtNasc;
-
-	@Field
-	private String genero;
 
 	@Lob
 	@Field

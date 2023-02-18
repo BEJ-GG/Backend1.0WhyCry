@@ -1,6 +1,7 @@
 package br.com.fiap.whycry.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -15,13 +16,15 @@ public class Agenda {
 	@MongoId()
 	private String id;
 
+	@Field
+	private String titulo;
 	
 	@Field
 	private String descricao;
 	
 	@Field
 	@DateTimeFormat(pattern = "dd/MM/yyyy-HH:mm:ss")
-	private LocalDateTime dataHrs;
+	private Date dataHora;
 	
 	@Field
 	private Bebe bebe;

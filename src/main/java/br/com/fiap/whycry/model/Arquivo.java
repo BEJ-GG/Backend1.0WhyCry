@@ -14,8 +14,6 @@ public class Arquivo {
 	@MongoId
 	private String id;
 	
-	@Field
-	private Bebe bebe;
 	
 	@Field
 	private String nome;
@@ -26,5 +24,8 @@ public class Arquivo {
 	@Field
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataArquivo;
+	
+	@Field
+	private Bebe bebe;
 
 }

@@ -13,12 +13,12 @@ public class Solucoes {
 	private String id;
 
 	@Field
-	private Classificacao classificacao;
-
-	@Field
 	private String nome;
 
 	@Field
 	private String descricao;
+
+	@Field
+	private Classificacao classificacao;
 
 }

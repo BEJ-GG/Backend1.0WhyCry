@@ -19,11 +19,11 @@ public class Bebe {
 	private String nome;
 
 	@Field
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataNasc;
+	private String genero;
 
 	@Field
-	private String genero;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private LocalDate dataNasc;
 
 	@Field
 	private Cliente cliente;

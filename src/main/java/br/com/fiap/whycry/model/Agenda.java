@@ -15,12 +15,13 @@ public class Agenda {
 	@MongoId()
 	private String id;
 
-	@Field
-	@DateTimeFormat(pattern = "dd/MM/yyyy-HH:mm:ss")
-	private LocalDateTime dataHrs;
 	
 	@Field
 	private String descricao;
+	
+	@Field
+	@DateTimeFormat(pattern = "dd/MM/yyyy-HH:mm:ss")
+	private LocalDateTime dataHrs;
 	
 	@Field
 	private Bebe bebe;

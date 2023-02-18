@@ -2,9 +2,7 @@ package br.com.fiap.whycry.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +20,15 @@ import br.com.fiap.whycry.model.Avaliacao;
 import br.com.fiap.whycry.service.AvaliacaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/v1")
-@Tag(name = "Avaliacao")
+@Tag(name = "Avaliação")
 public class AvaliacaoController {
 
 	@Autowired
-	AvaliacaoService avaliacaoService;
+	public AvaliacaoService avaliacaoService;
 
 	@Operation(summary = "Listar Avaliações")
 	@GetMapping("/avaliacao")
@@ -60,7 +59,7 @@ public class AvaliacaoController {
 	}
 
 	@Operation(summary = "Remover avaliacao")
-	@DeleteMapping("{id}")
+	@DeleteMapping("/avaliacao/{id}")
 	public Optional<Avaliacao> removerAvaliacao(@PathVariable String id) {
 
 		return this.avaliacaoService.removerAvaliacao(id);

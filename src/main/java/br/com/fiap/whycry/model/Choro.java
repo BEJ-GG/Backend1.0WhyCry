@@ -13,7 +13,10 @@ public class Choro {
     private String id;
 
     @Field
-    private String dsecricao;
+    private String descricao;
+    
+    @Field
+    private Avaliacao avaliacao;
     
     @Field
     private Bebe bebe;
@@ -21,8 +24,6 @@ public class Choro {
     @Field
     private Classificacao classficacao;
 
-    @Field
-    private Avaliacao avaliacao;
 
 
     

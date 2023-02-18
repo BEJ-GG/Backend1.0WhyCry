@@ -30,10 +30,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class ChoroController {
 
 	@Autowired
-	ChoroService choroService;
+	public ChoroService choroService;
 
 	@Operation(summary = "Listar choros")
-	@GetMapping
+	@GetMapping("/choro")
 	public List<Choro> listarChoros() {
 		return this.choroService.listarChoros();
 	}

@@ -27,13 +27,15 @@ public class ArquivoService {
 	public Arquivo incluirArquivo(Arquivo arquivo) {
 		Bebe bebe = this.bebeRepository.findById(arquivo.getBebe().getId())
 				.orElseThrow(() -> new IllegalArgumentException(("Bebe não encontrado")));
+		
+		
 		arquivo.setBebe(bebe);
 		return this.arquivoRepository.save(arquivo);
 	}
 
 	public Arquivo alterarArquivo(Arquivo arquivo, String id) {
 		Arquivo arquivoDb = this.arquivoRepository.findById(arquivo.getId())
-				.orElseThrow(() -> new IllegalArgumentException(("Arquivo não encontrada")));
+				.orElseThrow(() -> new IllegalArgumentException(("Arquivo não encontrado")));
 
 		arquivoDb.setBebe(arquivo.getBebe());
 		arquivoDb.setDataArquivo(arquivo.getDataArquivo());

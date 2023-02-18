@@ -23,8 +23,8 @@ import br.com.fiap.whycry.service.ArquivoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/v1")
 @Tag(name = "Arquivo")
 public class ArquivoController {
@@ -53,7 +53,7 @@ public class ArquivoController {
 	}
 
 	@Operation(summary = "Alterar arquivo")
-	@PutMapping("/arquivo{id}")
+	@PutMapping("/arquivo/{id}")
 	public Arquivo alterarArquivo(@PathVariable String id, @RequestBody Arquivo arquivo) {
 
 		return this.arquivoService.alterarArquivo(arquivo, id);

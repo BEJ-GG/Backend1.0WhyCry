@@ -1,6 +1,6 @@
 package br.com.fiap.whycry.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Lob;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -33,11 +33,11 @@ public class Cliente {
 
 	@Field
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dtNasc;
+	private Date dtNasc;
 
 	@Field
 	private String genero;
-	
+
 	@Lob
 	@Field
 	private byte[] imagem;

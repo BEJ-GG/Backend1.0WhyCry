@@ -7,7 +7,7 @@
 		<version>2.7.8</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.fiap.whycry</groupId>
+	<groupId>br.com.whycry</groupId>
 	<artifactId>whycry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>whycry</name>

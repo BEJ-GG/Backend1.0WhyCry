@@ -9,7 +9,7 @@ services:
     expose:
       - 27017
     volumes:
-      - ./database:data/db
+      - ./database-vol:/data/db
     environment:
       - AUTH=no
     networks:
@@ -26,12 +26,12 @@ services:
     networks:
       - mongo-network
     depends_on:
-      - databse
-      
+      - database
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
     container_name: elastic
-    enviroment:
+    environment:
       - bootstrap.memory_lock=true
     ports:
       - "9200:9200"
@@ -48,7 +48,7 @@ services:
   kibana:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
     container_name: kibana
-    ports: 
+    ports:
       - "5601:5601"
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
@@ -59,11 +59,11 @@ services:
       - elastic
     deploy:
       resources:
-        limits: 
+        limits:
           cpus: '0.50'
           memory: 600M
 
-  logstash: 
+  logstash:
     image: docker.elastic.co/logstash/logstash:8.6.0
     container_name: logstash
     volumes:
@@ -82,10 +82,10 @@ services:
       - elasticsearch
     deploy:
      resources:
-       limits: 
+       limits:
          cpus: '0.50'
          memory: 600M
-      
+
 networks:
   mongo-network:
     driver: bridge
@@ -93,5 +93,7 @@ networks:
     driver: bridge
 
 volumes:
- elasticsearch_data:
-   driver: local
+  database-vol:
+    driver: local
+  elasticsearch_data:
+    driver: local

@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +31,16 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Cliente")
 public class ClienteController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClienteController.class);
+
 	@Autowired
 	private ClienteService clienteService;
 
 	@Operation(summary = "Listar clientes")
 	@GetMapping("/cliente")
 	public List<Cliente> listarClientes() {
+
+		LOGGER.info("Listar clientes");
 		return clienteService.listarClientes();
 	}
 

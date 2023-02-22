@@ -10,6 +10,4 @@ public class WhycryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WhycryApplication.class, args);
 	}
-
 }
- 

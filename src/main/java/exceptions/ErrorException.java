@@ -12,6 +12,10 @@ import lombok.Getter;
 @Getter
 public class ErrorException  extends RuntimeException{
 	
+	/**
+	 * Tratativas de erro
+	 */
+	private static final long serialVersionUID = 1L;
 	private HttpStatus status;
 	private Date timestamp;
 	

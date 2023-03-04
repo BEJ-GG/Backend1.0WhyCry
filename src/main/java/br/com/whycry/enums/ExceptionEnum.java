@@ -1,4 +1,4 @@
-package enums;
+package br.com.whycry.enums;
 
 import org.springframework.http.HttpStatus;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public enum EnumException {
+public enum ExceptionEnum {
 
 	NOT_FOUND("A consulta realizada não retornou nenhum resultado", HttpStatus.NOT_FOUND),
 	BAD_REQUEST("A requisição está incorreta, por favor consultar a documentação do serviço", HttpStatus.BAD_REQUEST),
